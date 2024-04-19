@@ -8,8 +8,6 @@ import com.enesderin.employeemanagmentsystem.entities.Employee;
 import com.enesderin.employeemanagmentsystem.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.Errors;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,9 +23,8 @@ public class EmployeeManager implements EmployeeService {
     public List<GetAllEmployees> getAllEmployees() {
 
         List<Employee> employees = employeeRepository.findAll();
-        List<GetAllEmployees> getAllEmployees = modelMapper.map(employees, new ArrayList<GetAllEmployees>().getClass());
 
-        return getAllEmployees;
+        return modelMapper.map(employees, new ArrayList<GetAllEmployees>().getClass());
     }
 
     @Override

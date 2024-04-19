@@ -4,9 +4,7 @@ import com.enesderin.employeemanagmentsystem.business.abstracts.EmployeeService;
 import com.enesderin.employeemanagmentsystem.dtos.requests.CreateEmployeeRequest;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetAllEmployees;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetOneEmployeeResponse;
-import com.enesderin.employeemanagmentsystem.entities.Employee;
 import lombok.AllArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
