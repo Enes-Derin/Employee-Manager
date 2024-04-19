@@ -17,7 +17,7 @@ public class Employee {
     private String email;
     private String jobTitle;
     private String phone;
-    private String imageUrl;
     private Boolean isManager;
     private String employeeCode;
+
 }
