@@ -2,8 +2,10 @@ package com.enesderin.employeemanagmentsystem.business.concretes;
 
 import com.enesderin.employeemanagmentsystem.business.abstracts.EmployeeService;
 import com.enesderin.employeemanagmentsystem.dtos.requests.CreateEmployeeRequest;
+import com.enesderin.employeemanagmentsystem.dtos.requests.UpdateEmployeeRequest;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetAllEmployees;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetOneEmployeeResponse;
+import com.enesderin.employeemanagmentsystem.dtos.responses.UpdatedEmployeeResponse;
 import com.enesderin.employeemanagmentsystem.entities.Employee;
 import com.enesderin.employeemanagmentsystem.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
@@ -23,8 +25,9 @@ public class EmployeeManager implements EmployeeService {
     public List<GetAllEmployees> getAllEmployees() {
 
         List<Employee> employees = employeeRepository.findAll();
+        List<GetAllEmployees> getAllEmployees = new ArrayList<GetAllEmployees>();
 
-        return modelMapper.map(employees, new ArrayList<GetAllEmployees>().getClass());
+        return modelMapper.map(employees, getAllEmployees.getClass());
     }
 
     @Override
@@ -47,6 +50,19 @@ public class EmployeeManager implements EmployeeService {
         GetOneEmployeeResponse getOneEmployeeResponse = new GetOneEmployeeResponse();
         modelMapper.map(employee, getOneEmployeeResponse);
         return getOneEmployeeResponse;
+    }
+
+    @Override
+    public UpdatedEmployeeResponse UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest) {
+
+        Optional<Employee> employee = employeeRepository.findById(id);
+        UpdatedEmployeeResponse updatedEmployeeResponse = new UpdatedEmployeeResponse();
+        if (employee.isPresent()) {
+            modelMapper.map(updateEmployeeRequest, employee.get());
+            this.employeeRepository.save(employee.get());
+            modelMapper.map(employee.get(), updatedEmployeeResponse);
+        }
+        return updatedEmployeeResponse;
     }
 
     @Override

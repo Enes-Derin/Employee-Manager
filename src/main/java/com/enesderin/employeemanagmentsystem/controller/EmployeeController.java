@@ -2,8 +2,10 @@ package com.enesderin.employeemanagmentsystem.controller;
 
 import com.enesderin.employeemanagmentsystem.business.abstracts.EmployeeService;
 import com.enesderin.employeemanagmentsystem.dtos.requests.CreateEmployeeRequest;
+import com.enesderin.employeemanagmentsystem.dtos.requests.UpdateEmployeeRequest;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetAllEmployees;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetOneEmployeeResponse;
+import com.enesderin.employeemanagmentsystem.dtos.responses.UpdatedEmployeeResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,11 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public Optional<GetOneEmployeeResponse> getOneById(@PathVariable int id)  {
         return employeeService.getOneById(id);
+    }
+
+    @PutMapping("/{id}")
+    public UpdatedEmployeeResponse updateEmployee(@PathVariable int id, @RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
+        return this.employeeService.UpdateEmployee(id, updateEmployeeRequest);
     }
 
     @DeleteMapping("/{id}")
