@@ -1,35 +1,46 @@
 package com.enesderin.employeemanagmentsystem.controller;
 
-import com.enesderin.employeemanagmentsystem.business.abstracts.EmployeeService;
+import com.enesderin.employeemanagmentsystem.business.concretes.EmployeeManager;
 import com.enesderin.employeemanagmentsystem.dtos.requests.CreateEmployeeRequest;
 import com.enesderin.employeemanagmentsystem.dtos.requests.UpdateEmployeeRequest;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetAllEmployees;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetOneEmployeeResponse;
 import com.enesderin.employeemanagmentsystem.dtos.responses.UpdatedEmployeeResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/employee")
 @AllArgsConstructor
 public class EmployeeController {
-    private EmployeeService employeeService;
+    private EmployeeManager employeeService;
 
     @GetMapping
-    public List<GetAllEmployees> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public ModelAndView getAllEmployees(Model model) {
+        model.addAttribute("employees", employeeService.getAllEmployees());
+        return new ModelAndView("index.html");
     }
 
-    @PostMapping
-    public GetOneEmployeeResponse createEmployee(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
-        return employeeService.CreateEmployee(createEmployeeRequest);
+    @GetMapping("/create")
+    public ModelAndView createEmployee(Model model) {
+        model.addAttribute("createEmployeeRequest", new CreateEmployeeRequest());
+        return new ModelAndView("create.html");
+    }
+
+    @PostMapping("/create")
+    public ModelAndView createEmployee(@ModelAttribute("createEmployeeRequest") CreateEmployeeRequest createEmployeeRequest) {
+        employeeService.CreateEmployee(createEmployeeRequest);
+        return new ModelAndView("index.html");
     }
 
     @GetMapping("/{id}")
-    public Optional<GetOneEmployeeResponse> getOneById(@PathVariable int id)  {
+    public GetOneEmployeeResponse getOneById(@PathVariable int id)  {
         return employeeService.getOneById(id);
     }
 

@@ -15,4 +15,5 @@ public class GetOneEmployeeResponse {
     private String imageUrl;
     private Boolean isManager;
     private String employeeCode;
+    private byte[] imageData;
 }

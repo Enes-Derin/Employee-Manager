@@ -7,14 +7,16 @@ import com.enesderin.employeemanagmentsystem.dtos.responses.GetAllEmployees;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetOneEmployeeResponse;
 import com.enesderin.employeemanagmentsystem.dtos.responses.UpdatedEmployeeResponse;
 import com.enesderin.employeemanagmentsystem.entities.Employee;
+import com.enesderin.employeemanagmentsystem.exception.NotFoundException;
 import com.enesderin.employeemanagmentsystem.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class EmployeeManager implements EmployeeService {
@@ -31,13 +33,9 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public Optional<GetOneEmployeeResponse> getOneById(int id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-        GetOneEmployeeResponse getOneEmployeeResponse = new GetOneEmployeeResponse();
-        if (employee.isPresent()) {
-            modelMapper.map(employee, getOneEmployeeResponse);
-        }
-        return Optional.of(getOneEmployeeResponse);
+    public GetOneEmployeeResponse getOneById(int id) {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new NotFoundException("Employee not found"));
+        return modelMapper.map(employee, GetOneEmployeeResponse.class);
 
 
     }
@@ -55,13 +53,11 @@ public class EmployeeManager implements EmployeeService {
     @Override
     public UpdatedEmployeeResponse UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest) {
 
-        Optional<Employee> employee = employeeRepository.findById(id);
+        Employee employee = employeeRepository.findById(id).orElse(null);
         UpdatedEmployeeResponse updatedEmployeeResponse = new UpdatedEmployeeResponse();
-        if (employee.isPresent()) {
-            modelMapper.map(updateEmployeeRequest, employee.get());
-            this.employeeRepository.save(employee.get());
-            modelMapper.map(employee.get(), updatedEmployeeResponse);
-        }
+        modelMapper.map(updateEmployeeRequest, employee);
+        this.employeeRepository.save(employee);
+        modelMapper.map(employee, updatedEmployeeResponse);
         return updatedEmployeeResponse;
     }
 

@@ -8,4 +8,5 @@ public class UpdatedEmployeeResponse {
     private String phone;
     private Boolean isManager;
     private String employeeCode;
+    private byte[] imageData;
 }

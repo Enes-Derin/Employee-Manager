@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Employee Manager System</h1>
+
+    <a th:href="@{/employee/create}">Add Employee</a>
+
+    <table class="table">
+        <thead>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Job Title</th>
+        <th scope="col">İşlem</th>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.name}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.jobTitle}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>

@@ -15,4 +15,5 @@ public class GetAllEmployees {
     private String Phone;
     private String ImageUrl;
     private Boolean IsManager;
+    private byte[] ImageData;
 }
