@@ -26,6 +26,13 @@ public class EmployeeController {
         return "index";
     }
 
+
+    @GetMapping("/get/{id}")
+    public String getEmployee(@PathVariable int id, Model model) {
+        model.addAttribute("employee", employeeService.getOneById(id));
+        return "getEmployee";
+    }
+
     @GetMapping("/create")
     public String viewCreateEmployee(Model model) {
         model.addAttribute("createEmployeeRequest", new CreateEmployeeRequest());

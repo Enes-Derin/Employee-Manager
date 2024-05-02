@@ -16,7 +16,7 @@
     <th scope="col">Employee Code</th>
     </thead>
     <tbody>
-    <tr>
+    <tr th:each="employee : ${employee}">
         <td th:text="${employee.name}"></td>
         <td th:text="${employee.email}"></td>
         <td th:text="${employee.jobTitle}"></td>
