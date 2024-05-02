@@ -16,7 +16,7 @@ public interface EmployeeService {
 
     GetOneEmployeeResponse CreateEmployee(CreateEmployeeRequest createEmployeeRequest);
 
-    UpdatedEmployeeResponse UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest);
+    UpdatedEmployeeResponse updateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest);
 
     void DeleteEmployee(int id);
 

@@ -27,9 +27,7 @@ public class EmployeeManager implements EmployeeService {
     public List<GetAllEmployees> getAllEmployees() {
 
         List<Employee> employees = employeeRepository.findAll();
-        List<GetAllEmployees> getAllEmployees = new ArrayList<GetAllEmployees>();
-
-        return modelMapper.map(employees, getAllEmployees.getClass());
+        return modelMapper.map(employees, new ArrayList<GetAllEmployees>().getClass());
     }
 
     @Override
@@ -43,7 +41,12 @@ public class EmployeeManager implements EmployeeService {
     @Override
     public GetOneEmployeeResponse CreateEmployee(CreateEmployeeRequest createEmployeeRequest) {
         Employee employee = new Employee();
-        modelMapper.map(createEmployeeRequest, employee);
+        employee.setName(createEmployeeRequest.getName());
+        employee.setEmail(createEmployeeRequest.getEmail());
+        employee.setJobTitle(createEmployeeRequest.getJobTitle());
+        employee.setPhone(createEmployeeRequest.getPhone());
+        employee.setIsManager(createEmployeeRequest.getIsManager());
+        employee.setEmployeeCode(createEmployeeRequest.getEmployeeCode());
         employeeRepository.save(employee);
         GetOneEmployeeResponse getOneEmployeeResponse = new GetOneEmployeeResponse();
         modelMapper.map(employee, getOneEmployeeResponse);
@@ -51,12 +54,18 @@ public class EmployeeManager implements EmployeeService {
     }
 
     @Override
-    public UpdatedEmployeeResponse UpdateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest) {
+    public UpdatedEmployeeResponse updateEmployee(int id, UpdateEmployeeRequest updateEmployeeRequest) {
 
-        Employee employee = employeeRepository.findById(id).orElse(null);
+        Employee employee = employeeRepository.findById(id).get();
+
+        employee.setName(updateEmployeeRequest.getName());
+        employee.setEmail(updateEmployeeRequest.getEmail());
+        employee.setJobTitle(updateEmployeeRequest.getJobTitle());
+        employee.setPhone(updateEmployeeRequest.getPhone());
+        employee.setIsManager(updateEmployeeRequest.getIsManager());
+        employee.setEmployeeCode(updateEmployeeRequest.getEmployeeCode());
+        employeeRepository.save(employee);
         UpdatedEmployeeResponse updatedEmployeeResponse = new UpdatedEmployeeResponse();
-        modelMapper.map(updateEmployeeRequest, employee);
-        this.employeeRepository.save(employee);
         modelMapper.map(employee, updatedEmployeeResponse);
         return updatedEmployeeResponse;
     }

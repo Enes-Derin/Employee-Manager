@@ -8,12 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GetOneEmployeeResponse {
+    private int Id;
     private String name;
     private String email;
     private String jobTitle;
     private String phone;
-    private String imageUrl;
     private Boolean isManager;
     private String employeeCode;
-    private byte[] imageData;
 }

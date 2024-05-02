@@ -13,7 +13,5 @@ public class GetAllEmployees {
     private String Email;
     private String JobTitle;
     private String Phone;
-    private String ImageUrl;
     private Boolean IsManager;
-    private byte[] ImageData;
 }

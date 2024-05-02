@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/employee/update/{id}(id=${updateEmployeeRequest.id})}" th:object="${updateEmployeeRequest}" method="post">
+
+    <label for="name">Name</label>
+    <input type="text" th:field="${updateEmployeeRequest.name}" id="name" placeholder="Name">
+    <label for="email">Email</label>
+    <input type="text" th:field="${updateEmployeeRequest.email}" id="email" th:value="${updateEmployeeRequest.email}">
+    <label for="jobTitle">Job Title</label>
+    <input type="text" th:field="${updateEmployeeRequest.jobTitle}" id="jobTitle" placeholder="Job Title">
+    <label for="phone">Phone</label>
+    <input type="text" th:field="${updateEmployeeRequest.phone}" id="phone" placeholder="Phone">
+    <label for="isManager">Is Manager</label>
+    <input type="checkbox" th:field="${updateEmployeeRequest.isManager}" id="isManager">
+    <label for="employeeCode">Employee Code</label>
+    <input type="text" th:field="${updateEmployeeRequest.employeeCode}" id="employeeCode" placeholder="Employee Code">
+
+    <button type="submit">Update</button>
+    <button><a th:href="@{/employee}">Cancel</a></button>
+</form></body>
+</html>

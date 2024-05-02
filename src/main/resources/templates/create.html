@@ -20,7 +20,8 @@
         <label for="employeeCode">Employee Code</label>
         <input type="text" th:field="${createEmployeeRequest.employeeCode}" id="employeeCode" placeholder="Employee Code">
 
-        <input type="submit" value="Create">
+        <button type="submit">Save Create</button>
+        <button><a th:href="@{/employee}">Cancel</a></button>
 
     </form>
 </body>

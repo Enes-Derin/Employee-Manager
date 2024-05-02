@@ -7,50 +7,52 @@ import com.enesderin.employeemanagmentsystem.dtos.responses.GetAllEmployees;
 import com.enesderin.employeemanagmentsystem.dtos.responses.GetOneEmployeeResponse;
 import com.enesderin.employeemanagmentsystem.dtos.responses.UpdatedEmployeeResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.io.IOException;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/employee")
 @AllArgsConstructor
 public class EmployeeController {
     private EmployeeManager employeeService;
 
     @GetMapping
-    public ModelAndView getAllEmployees(Model model) {
+    public String getAllEmployees(Model model) {
         model.addAttribute("employees", employeeService.getAllEmployees());
-        return new ModelAndView("index.html");
+        return "index";
     }
 
     @GetMapping("/create")
-    public ModelAndView createEmployee(Model model) {
+    public String viewCreateEmployee(Model model) {
         model.addAttribute("createEmployeeRequest", new CreateEmployeeRequest());
-        return new ModelAndView("create.html");
+        return "create";
     }
+
 
     @PostMapping("/create")
-    public ModelAndView createEmployee(@ModelAttribute("createEmployeeRequest") CreateEmployeeRequest createEmployeeRequest) {
+    public String createEmployee(@ModelAttribute CreateEmployeeRequest createEmployeeRequest) {
         employeeService.CreateEmployee(createEmployeeRequest);
-        return new ModelAndView("index.html");
+        return "redirect:/employee";
     }
 
-    @GetMapping("/{id}")
-    public GetOneEmployeeResponse getOneById(@PathVariable int id)  {
-        return employeeService.getOneById(id);
+    @GetMapping("/update/{id}")
+    public String  updateEmployee(@PathVariable int id, Model model) {
+        model.addAttribute("updateEmployeeRequest", this.employeeService.getOneById(id));
+        return "update";
+    }
+    @PostMapping("/update/{id}")
+    public String updateEmployee(@PathVariable int id,@ModelAttribute UpdateEmployeeRequest updateEmployeeRequest) {
+        employeeService.updateEmployee(id, updateEmployeeRequest);
+        return "redirect:/employee";
     }
 
-    @PutMapping("/{id}")
-    public UpdatedEmployeeResponse updateEmployee(@PathVariable int id, @RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
-        return this.employeeService.UpdateEmployee(id, updateEmployeeRequest);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable int id) {
+    @GetMapping("/delete/{id}")
+    public String deleteEmployee(@PathVariable int id) {
         employeeService.DeleteEmployee(id);
+        return "redirect:/employee";
     }
 }
