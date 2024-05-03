@@ -10,14 +10,16 @@
 <body>
     <form class="container" action="#" th:action="@{/employee/create}" th:object="${createEmployeeRequest}" method="post">
 
+
+
         <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" th:field="${createEmployeeRequest.name}" id="name" placeholder="Name"><br>
+        <input type="text" class="form-control" th:field="${createEmployeeRequest.name}" required id="name" placeholder="Name"><br>
         <label for="email" class="form-label">Email</label>
-        <input type="text" class="form-control" th:field="${createEmployeeRequest.email}" id="email" placeholder="Email"><br>
+        <input type="text" class="form-control" th:field="${createEmployeeRequest.email}" required id="email" placeholder="Email"><br>
         <label for="jobTitle" class="form-label">Job Title</label>
-        <input type="text" class="form-control" th:field="${createEmployeeRequest.jobTitle}" id="jobTitle" placeholder="Job Title"><br>
+        <input type="text" class="form-control" th:field="${createEmployeeRequest.jobTitle}" required id="jobTitle" placeholder="Job Title"><br>
         <label for="phone" class="form-label">Phone</label>
-        <input type="text"  class="form-control" th:field="${createEmployeeRequest.phone}" id="phone" placeholder="Phone"><br>
+        <input type="text"  class="form-control" th:field="${createEmployeeRequest.phone}" required id="phone" placeholder="Phone"><br>
         <div class="d-flex justify-content-center mr-5 mt-4">
         <button type="submit" class="btn btn-primary mr-5">Save Create</button>
         <button class="btn btn-danger"><a class="text-white" th:href="@{/employee}" >Cancel</a></button>
