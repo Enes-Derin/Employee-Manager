@@ -23,7 +23,4 @@ public class Employee {
 
     private String phone;
 
-    private Boolean isManager;
-
-    private String employeeCode;
 }

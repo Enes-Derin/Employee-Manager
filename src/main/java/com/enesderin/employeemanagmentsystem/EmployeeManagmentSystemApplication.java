@@ -9,5 +9,7 @@ public class EmployeeManagmentSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(EmployeeManagmentSystemApplication.class, args);
     }
-
+    // TODO
+    //  - Swagger
+    //  - Exception handling
 }

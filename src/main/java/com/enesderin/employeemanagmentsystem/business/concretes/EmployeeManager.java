@@ -45,8 +45,6 @@ public class EmployeeManager implements EmployeeService {
         employee.setEmail(createEmployeeRequest.getEmail());
         employee.setJobTitle(createEmployeeRequest.getJobTitle());
         employee.setPhone(createEmployeeRequest.getPhone());
-        employee.setIsManager(createEmployeeRequest.getIsManager());
-        employee.setEmployeeCode(createEmployeeRequest.getEmployeeCode());
         employeeRepository.save(employee);
         GetOneEmployeeResponse getOneEmployeeResponse = new GetOneEmployeeResponse();
         modelMapper.map(employee, getOneEmployeeResponse);
@@ -62,8 +60,6 @@ public class EmployeeManager implements EmployeeService {
         employee.setEmail(updateEmployeeRequest.getEmail());
         employee.setJobTitle(updateEmployeeRequest.getJobTitle());
         employee.setPhone(updateEmployeeRequest.getPhone());
-        employee.setIsManager(updateEmployeeRequest.getIsManager());
-        employee.setEmployeeCode(updateEmployeeRequest.getEmployeeCode());
         employeeRepository.save(employee);
         UpdatedEmployeeResponse updatedEmployeeResponse = new UpdatedEmployeeResponse();
         modelMapper.map(employee, updatedEmployeeResponse);

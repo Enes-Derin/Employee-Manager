@@ -13,5 +13,4 @@ public class GetAllEmployees {
     private String Email;
     private String JobTitle;
     private String Phone;
-    private Boolean IsManager;
 }

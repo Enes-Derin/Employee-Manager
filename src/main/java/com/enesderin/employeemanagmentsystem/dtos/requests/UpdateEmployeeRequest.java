@@ -12,6 +12,4 @@ public class UpdateEmployeeRequest {
     private String email;
     private String jobTitle;
     private String phone;
-    private Boolean isManager;
-    private String employeeCode;
 }

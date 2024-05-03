@@ -2,28 +2,50 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Title</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .button{
+            border: 0;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .button:hover{
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>Employee Manager System</h1>
+    <h1 class="text-center display-5">Employee Manager System</h1>
 
-    <a th:href="@{/employee/create}">Add Employee</a>
+  <div class="d-flex justify-content-end mr-5 mt-4"><button class="button btn-primary mr-5"><a class="text-white" th:href="@{/employee/create}">Create Employee</a></button></div>
 
-    <table class="table">
-        <thead>
+    <table class="table table-striped text-center container mt-5">
+        <thead class="bg-warning">
         <th scope="col">Name</th>
-        <th scope="col">Email</th>
         <th scope="col">Job Title</th>
-        <th scope="col">İşlem</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefon</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
         </thead>
         <tbody>
         <tr th:each="employee : ${employees}">
             <td th:text="${employee.name}"></td>
-            <td th:text="${employee.email}"></td>
             <td th:text="${employee.jobTitle}"></td>
-            <td><a th:href="@{/employee/get/{id}(id = ${employee.id})}">Get Employee</a></td>
-            <td><a th:href="@{/employee/update/{id}(id = ${employee.id})}">Update</a></td>
-            <td><a th:href="@{/employee/delete/{id}(id=${employee.id})}">Delete</a></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.phone}"></td>
+            <td><button class="button btn-success"><a class="text-white" th:href="@{/employee/get/{id}(id = ${employee.id})}">Get Employee</a></button></td>
+            <td><button class="button btn-warning"><a class="text-white" th:href="@{/employee/update/{id}(id = ${employee.id})}">Update</a></button></td>
+            <td><button class="button btn-danger"><a class="text-white" onclick="return confirm('Are you sure?')" th:href="@{/employee/delete/{id}(id=${employee.id})}">Delete</a></button></td>
         </tr>
         </tbody>
 

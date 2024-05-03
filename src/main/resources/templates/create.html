@@ -2,27 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Create Employee</title>
 </head>
 <body>
-    <form action="#" th:action="@{/employee/create}" th:object="${createEmployeeRequest}" method="post">
+    <form class="container" action="#" th:action="@{/employee/create}" th:object="${createEmployeeRequest}" method="post">
 
-        <label for="name">Name</label>
-        <input type="text" th:field="${createEmployeeRequest.name}" id="name" placeholder="Name">
-        <label for="email">Email</label>
-        <input type="text" th:field="${createEmployeeRequest.email}" id="email" placeholder="Email">
-        <label for="jobTitle">Job Title</label>
-        <input type="text" th:field="${createEmployeeRequest.jobTitle}" id="jobTitle" placeholder="Job Title">
-        <label for="phone">Phone</label>
-        <input type="text" th:field="${createEmployeeRequest.phone}" id="phone" placeholder="Phone">
-        <label for="isManager">Is Manager</label>
-        <input type="checkbox" th:field="${createEmployeeRequest.isManager}" id="isManager">
-        <label for="employeeCode">Employee Code</label>
-        <input type="text" th:field="${createEmployeeRequest.employeeCode}" id="employeeCode" placeholder="Employee Code">
-
-        <button type="submit">Save Create</button>
-        <button><a th:href="@{/employee}">Cancel</a></button>
-
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" th:field="${createEmployeeRequest.name}" id="name" placeholder="Name"><br>
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" th:field="${createEmployeeRequest.email}" id="email" placeholder="Email"><br>
+        <label for="jobTitle" class="form-label">Job Title</label>
+        <input type="text" class="form-control" th:field="${createEmployeeRequest.jobTitle}" id="jobTitle" placeholder="Job Title"><br>
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text"  class="form-control" th:field="${createEmployeeRequest.phone}" id="phone" placeholder="Phone"><br>
+        <div class="d-flex justify-content-center mr-5 mt-4">
+        <button type="submit" class="btn btn-primary mr-5">Save Create</button>
+        <button class="btn btn-danger"><a class="text-white" th:href="@{/employee}" >Cancel</a></button>
+        </div>
     </form>
 </body>
 </html>

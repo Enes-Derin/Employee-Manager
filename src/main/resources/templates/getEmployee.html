@@ -2,30 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Get Employee</title>
 </head>
 <body>
 
-<table class="table">
+<h1 class="text-center display-5">[[${employee.name}]]</h1>
+
+<table class="table container">
     <thead>
-    <th scope="col">Name</th>
     <th scope="col">Email</th>
     <th scope="col">Job Title</th>
     <th scope="col">Phone</th>
-    <th scope="col">Is Manager</th>
-    <th scope="col">Employee Code</th>
     </thead>
     <tbody>
     <tr th:each="employee : ${employee}">
-        <td th:text="${employee.name}"></td>
         <td th:text="${employee.email}"></td>
         <td th:text="${employee.jobTitle}"></td>
         <td th:text="${employee.phone}"></td>
-        <td th:text="${employee.isManager}"></td>
-        <td th:text="${employee.employeeCode}"></td>
     </tr>
     </tbody>
-
 </table>
+<div class="d-flex justify-content-end mr-5 mt-4">
+    <button class="btn btn-danger mt-5"><a class="text-white" th:href="@{/employee}">Back</a></button>
+
+</div>
+
 </body>
 </html>
